@@ -11,7 +11,7 @@ const Message = () => {
       </div>
       <div className="messageContent">
         <p>Hello Lyndsay</p>
-        {/* <img src="https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /> */}
+        <img src="https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
       </div>
     </div>
   )

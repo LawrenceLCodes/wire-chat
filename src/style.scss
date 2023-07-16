@@ -1,4 +1,27 @@
 // Main stylesheet for entire Wire chat application project
+
+// Mixins for responsive design
+@mixin mobile {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (max-width: 1200px) {
+        @content;
+    }
+}
+
+// SCSS Variables
+$darkColor: #2f2d52;
+
 // From Container styling used for both Login & Register pages
 .formContainer {
     background-color: #a7bcff;
@@ -86,7 +109,7 @@
     align-items: center;
     justify-content: center;
 
-    // Primary container styling
+    // Primary container that holds both sidebar and main chat window
     .container {
         border: 1px solid #fff;
         border-radius: 10px;
@@ -95,10 +118,19 @@
         display: flex;
         overflow: hidden;
 
+        @include tablet {
+            width: 90%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
+
         // Sidebar Component
         .sidebar {
             background-color: #3e3c61;
             flex: 1;
+            position: relative;
 
             // Navbar
             .navbar {
@@ -112,6 +144,10 @@
 
                 .logo {
                     font-weight: bold;
+
+                    @include tablet {
+                        display: none;
+                    }
                 }
 
                 .user {
@@ -132,6 +168,11 @@
                         font-size: 10px;
                         border: none;
                         cursor: pointer;
+
+                        @include tablet{
+                            bottom: 10px;
+                            position: absolute;
+                        }
                     }
                 }
             }
@@ -253,11 +294,26 @@
                         p {
                             background-color: #fff;
                             border-radius: 0px 10px 10px 10px;
+                            max-width: max-content;
                             padding: 10px 20px;
                         }
 
                         img {
                             width: 50%;
+                        }
+                    }
+
+                    &.owner {
+                        flex-direction: row-reverse;
+
+                        .messageContent {
+                            align-items: flex-end;
+                            
+                            p {
+                                background-color: #8da4f1;
+                                border-radius: 10px 0px 10px 10px;
+                                color: #fff;
+                            }
                         }
                     }
                 }
