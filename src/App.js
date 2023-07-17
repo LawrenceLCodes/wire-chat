@@ -1,11 +1,24 @@
 import Home from "./Pages/Home";
-// import Login from "./Pages/Login";
+import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./style.scss";
+
 
 function App() {
   return (
-    <Register />
+    // React Router
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+          {/* Login path */}
+          <Route path="login" element={<Login />} />
+          {/* Registration path */}
+          <Route path="register" element={<Register />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

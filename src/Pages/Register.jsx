@@ -1,8 +1,9 @@
 import { React, useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, storage } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, storage, db } from "../firebase";
 import Add from "../Images/addAvatar.png";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore"; 
 
 const Register = () => {
   const [error,setError] = useState(false);
@@ -28,18 +29,36 @@ const Register = () => {
       // 1. 'state_changed' observer, called any time the state changes
       // 2. Error observer, called on failure
       // 3. Completion observer, called on successful completion
-      uploadTask.on( 
+      uploadTask.on('state_changed', (snapshot) => {}, 
         (error) => {
           // Error handling for unsuccessful image uploads
           setError(true);
         }, 
         () => {
           // Handle successful uploads on complete
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log('File available at', downloadURL);
+          getDownloadURL(uploadTask.snapshot.ref).then( async(downloadURL) => {
+            // Updates user's image for their profile on firebase storage
+            await updateProfile(res.user,{
+              displayName,
+              photoURL:downloadURL,
+            });
+            // Writes to firestore database if user is not in the system
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL: downloadURL,
+            });
+
+            // Collection in firebase for list of user's chat displayed on sidebar
+            // Starts as an empty object since it will be empty when the user registers
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+
+            
           });
         }
       );
+
     } catch(error) {
       setError(true);
     }
