@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 // import { getAnalytics } from "firebase/analytics";
 
@@ -20,5 +21,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 // For authentication
 export const auth = getAuth();
+// Create a root reference for storing/uploading images to firebase storage
+export const storage = getStorage();
 
 // const analytics = getAnalytics(app);
