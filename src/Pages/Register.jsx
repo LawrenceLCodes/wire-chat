@@ -4,9 +4,14 @@ import { auth, storage, db } from "../firebase";
 import Add from "../Images/addAvatar.png";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  // useState for error handling for firebase calls
   const [error,setError] = useState(false);
+  // For navigating react router routes
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     // To prevent page from refreshing when registration form is submitted
     e.preventDefault();
@@ -54,7 +59,8 @@ const Register = () => {
             // Starts as an empty object since it will be empty when the user registers
             await setDoc(doc(db, "userChats", res.user.uid), {});
 
-            
+            // After a successful login with a stored user database entry, useNavigate is applied to go right to the homepage for chat
+            navigate("/");
           });
         }
       );

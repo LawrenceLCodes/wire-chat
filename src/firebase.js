@@ -20,7 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-// For authentication
+// For authentication using Firebase which handles it server-side
 export const auth = getAuth();
 // Create a root reference for storing/uploading images to firebase storage
 export const storage = getStorage();
