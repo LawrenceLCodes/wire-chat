@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 // import Add from "../Images/addAvatar.png";
 
 const Login = () => {
-  const [error,setError] = useState(false);
+  const [err,setErr] = useState(false);
   // For navigating react router routes
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/")
     } catch(error) {
-      setError(true);
+      setErr(true);
     }
   };
 
@@ -36,7 +36,7 @@ const Login = () => {
                 <input type="password" placeholder="Create A Password" />
                 <button>Sign In</button>
                 
-                {error && <span>Something went wrong!</span>}
+                {err && <span>Something went wrong!</span>}
 
                 <p>If you do not have an account? <Link to="/register">Register</Link></p>
             </form>
