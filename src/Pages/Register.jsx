@@ -4,7 +4,7 @@ import { auth, storage, db } from "../firebase";
 import Add from "../Images/addAvatar.png";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   // useState for error handling for firebase calls
@@ -87,7 +87,7 @@ const Register = () => {
                 <button>Sign Up</button>
               {error && <span>Something went wrong!</span>}
             </form>
-            <p>If you already have an account? Login here</p>
+            <p>If you already have an account? <Link to="/login">Login here</Link></p>
         </div>
     </div>
   )
