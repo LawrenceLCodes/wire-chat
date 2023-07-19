@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 // Firebase methods used on this component, check firebase docs for a refresher
-import { collection, query, where, getDocs, setDoc, doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { collection, query, where, getDocs, setDoc, doc, updateDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from '../Context/AuthContext';
 
@@ -45,7 +45,7 @@ const Search = () => {
     ? currentUser.uid + user.uid 
     : user.uid + currentUser.uid;
     try {
-      const res = await getDocs(db, "chats", combinedId);
+      const res = await getDoc(doc(db, "chats", combinedId));
       
       // If there is NO response, which means no existing chat between users involved inside "chats" collection on firebase, a new one will be created
       if(!res.exists()){
@@ -75,7 +75,9 @@ const Search = () => {
         });
       }
     }catch (err) {}
-    // Create user chats
+    // Clears searchbar and setUsername to empty string so that currentUser can look for another user in search if necessary
+    setUser(null);
+    setUsername("")
   };
 
   return (
@@ -83,11 +85,16 @@ const Search = () => {
       <div className="searchForm">
         {/* onChange - used to look for user based on text input in search bar */}
         {/* onKeyDown - Listener for key inputs*/}
-        <input type="text" placeholder="Find A User" onKeyDown={handleKey} onChange={e=>setUsername(e.target.value)} />
+        <input 
+          type="text" 
+          placeholder="Find A User" 
+          onKeyDown={handleKey} 
+          onChange={(e) => setUsername(e.target.value)}
+          value={username} />
       </div>
       {/* The below div with photo and display name will only generate if user is found and selected from above query and listener */}
       {/* If user is not found error handling will generate span - User not found message to user */}
-      {err && <span>User not found!</span> }
+      {err && <span>User not found!</span>}
       {user && <div className="userChat">
         <img src={user.photoURL} alt="" onClick={handleSelect}/>
         <div className="userChatInfo">
