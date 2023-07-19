@@ -6,10 +6,8 @@ import { AuthContext } from "./Context/AuthContext";
 import { useContext } from "react";
 import "./style.scss";
 
-
 function App() {
   const {currentUser} = useContext(AuthContext)
-  console.log(currentUser); 
 
   // Protected route to check for login. This will keep users not logged in from accessing home chat page
   const ProtectedRoute = ({children}) => {

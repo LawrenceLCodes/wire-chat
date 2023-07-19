@@ -8,7 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   // useState for error handling for firebase calls
-  const [error,setError] = useState(false);
+  const [err,setErr] = useState(false);
   // For navigating react router routes
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Register = () => {
       uploadTask.on('state_changed', (snapshot) => {}, 
         (error) => {
           // Error handling for unsuccessful image uploads
-          setError(true);
+          setErr(true);
         }, 
         () => {
           // Handle successful uploads on complete
@@ -66,7 +66,7 @@ const Register = () => {
       );
 
     } catch(error) {
-      setError(true);
+      setErr(true);
     }
   };
 
@@ -85,7 +85,7 @@ const Register = () => {
                     <span>Add an avatar</span>
                 </label>
                 <button>Sign Up</button>
-              {error && <span>Something went wrong!</span>}
+              {err && <span>Something went wrong!</span>}
             </form>
             <p>If you already have an account? <Link to="/login">Login here</Link></p>
         </div>
