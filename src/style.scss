@@ -13,7 +13,13 @@
     }
 }
 
-@mixin desktop {
+@mixin desktop-small {
+    @media screen and (min-width: 769px) and (max-width: 1199px) {
+        @content;
+    }
+}
+
+@mixin desktop-large {
     @media screen and (max-width: 1200px) {
         @content;
     }
@@ -21,6 +27,11 @@
 
 // SCSS Variables
 $darkColor: #2f2d52;
+$royalBlue: #4169e1;
+
+html {
+    background-color: $royalBlue;
+}
 
 // From Container styling used for both Login & Register pages
 .formContainer {
@@ -103,7 +114,7 @@ $darkColor: #2f2d52;
 
 // Home
 .home {
-    background-color: #a7bcff;
+    background-color: $royalBlue;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -117,6 +128,10 @@ $darkColor: #2f2d52;
         height: 80%;
         display: flex;
         overflow: hidden;
+
+        @include desktop-small {
+            width: 80%;
+        }
 
         @include tablet {
             width: 90%;
@@ -243,6 +258,14 @@ $darkColor: #2f2d52;
                 height: 50px;
                 justify-content: space-between;
                 padding: 10px;
+
+                .logo {
+                    font-weight: bold;
+
+                    @include tablet {
+                        display: none;
+                    }
+                }
             }
 
             .chatIcons {
@@ -310,7 +333,7 @@ $darkColor: #2f2d52;
                             align-items: flex-end;
                             
                             p {
-                                background-color: #8da4f1;
+                                background-color: $royalBlue;
                                 border-radius: 10px 0px 10px 10px;
                                 color: #fff;
                             }
@@ -353,8 +376,9 @@ $darkColor: #2f2d52;
 
                     button {
                         border: none;
-                        background-color: #8da4f1;
+                        background-color: $royalBlue;
                         color: #fff;
+                        cursor: pointer;
                         padding: 10px 15px;
                     }
                 }

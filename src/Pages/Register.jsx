@@ -73,7 +73,7 @@ const Register = () => {
   return (
     <div className="formContainer">
         <div className="formWrapper">
-            <span className="logo">Earth Messaging System</span>
+            <span className="logo">UNATCO Messaging System</span>
             <span className="title">Register</span>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter A Display Name" />

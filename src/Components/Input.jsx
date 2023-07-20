@@ -89,7 +89,8 @@ const Input = () => {
         value={text}
       />
       <div className="send">
-        <img src={Attach} alt="" />
+        {/* Attaching files and documents is currently non-functional, hiding icon until working code can be added */}
+        {/* <img src={Attach} alt="" /> */}
         <input type="file" style={{display:"none"}} id="file" onChange={(e)=>setImage(e.target.files[0])} />
         <label htmlFor="file">
           <img src={Img} alt="" />
